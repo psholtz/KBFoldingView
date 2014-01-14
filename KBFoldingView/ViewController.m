@@ -24,12 +24,17 @@
 //  Created by Paul Sholtz on 5/5/13.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "ViewController.h"
 
 #import "UIView+Folding.h"
 
-static const NSString *kbFoldLabel      = @"Folds: %d";
-static const NSString *kbDurationLabel  = @"Duration: %@";
+#define kbBackgroundColor [UIColor colorWithRed:0.701961 green:0.701961 blue:0.701961 alpha:0.7f]
+
+static const NSString * kbFoldLabel      = @"Folds: %d";
+static const NSString * kbDurationLabel  = @"Duration: %@";
+static const CGFloat    kbCornerRadius   = 5.0f;
 
 @interface ViewController ()
 
@@ -73,6 +78,30 @@ static const NSString *kbDurationLabel  = @"Duration: %@";
     _direction = self.directionControl.selectedSegmentIndex;
     _folds = (int)self.foldControl.value;
     _duration = self.durationControl.value;
+    
+    // Slight hacks for iOS7 UIs
+    if ( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        // Adjust colors
+        [self adjustSegmentedControlColor:self.directionControl];
+        [self adjustSliderControlColor:self.foldControl];
+        [self adjustSliderControlColor:self.durationControl];
+        [self adjustStepperControlColor:self.foldStepper];
+        [self adjustStepperControlColor:self.durationStepper];
+        
+        // Adjust positions
+        CGFloat margin1 = 10.0f;
+        [self adjustViewPosition:self.transitionButton withMargin:margin1];
+        [self adjustViewPosition:self.transitionLabel withMargin:margin1];
+        [self adjustViewPosition:self.directionControl withMargin:margin1];
+        [self adjustViewPosition:self.foldLabel withMargin:margin1];
+        [self adjustViewPosition:self.foldControl withMargin:margin1];
+        [self adjustViewPosition:self.foldStepper withMargin:margin1];
+        [self adjustViewPosition:self.durationLabel withMargin:margin1];
+        [self adjustViewPosition:self.durationControl withMargin:margin1];
+        [self adjustViewPosition:self.durationStepper withMargin:margin1];
+        [self adjustViewPosition:self.resetButton withMargin:margin1];
+        [self adjustViewPosition:self.resetLabel withMargin:margin1];
+    }
 }
 
 - (void)viewDidUnload {
@@ -84,6 +113,31 @@ static const NSString *kbDurationLabel  = @"Duration: %@";
 - (void)didReceiveMemoryWarning {
     self.endView = nil;
     [super didReceiveMemoryWarning];
+}
+
+// Hacks to adjust positions in iOS7
+- (void)adjustViewPosition:(UIView*)view1 withMargin:(CGFloat)margin {
+    CGRect tmp = view1.frame;
+    view1.frame = CGRectMake(tmp.origin.x, tmp.origin.y + margin, tmp.size.width, tmp.size.height);
+}
+
+// Hacks to adjust colors in iOS7
+- (void)adjustSegmentedControlColor:(UISegmentedControl*)control {
+    [control setTintColor:[UIColor blackColor]];
+    [control setBackgroundColor:kbBackgroundColor];
+    [control.layer setCornerRadius:kbCornerRadius];
+}
+
+- (void)adjustSliderControlColor:(UISlider*)control {
+    [control setTintColor:[UIColor blackColor]];
+    [control setMinimumTrackTintColor:[UIColor blackColor]];
+    [control setMaximumTrackTintColor:kbBackgroundColor];
+}
+
+- (void)adjustStepperControlColor:(UIStepper*)control {
+    [control setTintColor:[UIColor blackColor]];
+    [control setBackgroundColor:kbBackgroundColor];
+    [control.layer setCornerRadius:kbCornerRadius];
 }
 
 #pragma mark -

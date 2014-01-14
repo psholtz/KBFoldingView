@@ -31,15 +31,19 @@
 @interface ViewController : UIViewController
 
 // Control Views
-@property (nonatomic, KB_WEAK) IBOutlet UISegmentedControl *directionControl;
-@property (nonatomic, KB_WEAK) IBOutlet UISlider *foldControl;
-@property (nonatomic, KB_WEAK) IBOutlet UISlider *durationControl;
-@property (nonatomic, KB_WEAK) IBOutlet UIStepper *foldStepper;
-@property (nonatomic, KB_WEAK) IBOutlet UIStepper *durationStepper;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel *foldLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel *durationLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel *endLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UIButton* endButton;
+@property (nonatomic, KB_WEAK) IBOutlet UISegmentedControl * directionControl;
+@property (nonatomic, KB_WEAK) IBOutlet UISlider * foldControl;
+@property (nonatomic, KB_WEAK) IBOutlet UISlider * durationControl;
+@property (nonatomic, KB_WEAK) IBOutlet UIStepper * foldStepper;
+@property (nonatomic, KB_WEAK) IBOutlet UIStepper * durationStepper;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel * transitionLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel * foldLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel * durationLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel * resetLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel * endLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UIButton * transitionButton;
+@property (nonatomic, KB_WEAK) IBOutlet UIButton * resetButton;
+@property (nonatomic, KB_WEAK) IBOutlet UIButton * endButton;
 
 // Folding Views 
 @property (nonatomic, KB_WEAK) IBOutlet UIView *startView;
