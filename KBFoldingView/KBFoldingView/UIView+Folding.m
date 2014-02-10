@@ -132,6 +132,9 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
             shadowAniOpacity = (anchorPoint.x != 0.0f) ? 0.32f : 0.24f;
         }
         [imageLayer addSublayer:shadowLayer];
+        
+        // Release the image reference
+        CGImageRelease(imageCrop);
     }
     else
     {
@@ -180,6 +183,9 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
          }
         
         [imageLayer addSublayer:shadowLayer];
+        
+        // Release the image reference
+        CGImageRelease(imageCrop);
     }
 
     // Configure the open/close animation
@@ -383,9 +389,10 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
     //
     // Construct and Commit the Open Animation
     //
+    __weak typeof(self) _weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
-        self.frame = finalFrame;
+        _weakSelf.frame = finalFrame;
         [foldingLayer removeFromSuperlayer];
         
         // Reset the transition state
@@ -591,11 +598,11 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
     //
     // Construct and Commit the Close Animation
     //
+    __weak typeof(self) _weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
-        self.frame = finalFrame;
+        _weakSelf.frame = finalFrame;
         [foldingLayer removeFromSuperlayer];
-        _KBTransitionState = KBFoldingTransitionStateIdle;
         
         // Reset the transition state
         _KBTransitionState = KBFoldingTransitionStateIdle;
