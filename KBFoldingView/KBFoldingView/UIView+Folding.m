@@ -36,6 +36,8 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
     return -cos(time * M_PI_2) + 1.0f;
 };
 
+#pragma mark -
+#pragma mark Implementation (Parametrized Keyframe Animation)
 @implementation CAKeyframeAnimation (Parametrized)
 //
 // Private Interface
@@ -62,12 +64,16 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
 
 @end
 
+#pragma mark -
+#pragma mark Private Interface (UIView)
 @interface UIView (FoldingPrivate)
 
 - (BOOL)validateDuration:(NSTimeInterval)duration direction:(NSUInteger)direction folds:(NSUInteger)folds;
 
 @end
 
+#pragma mark -
+#pragma mark Implementation (Folding Category on UIView)
 @implementation UIView (Folding)
 - (NSUInteger)state {
     return _KBTransitionState;
@@ -392,13 +398,16 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
     __weak typeof(self) _weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
-        _weakSelf.frame = finalFrame;
-        [foldingLayer removeFromSuperlayer];
+        __strong typeof(self) _strongSelf = _weakSelf;
+        if ( _strongSelf ) {
+            _strongSelf.frame = finalFrame;
+            [foldingLayer removeFromSuperlayer];
         
-        // Reset the transition state
-        _KBTransitionState = KBFoldingTransitionStateShowing;
-        if ( onCompletion ) {
-            onCompletion(YES);
+            // Reset the transition state
+            _KBTransitionState = KBFoldingTransitionStateShowing;
+            if ( onCompletion ) {
+                onCompletion(YES);
+            }
         }
     }];
     
@@ -601,13 +610,16 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
     __weak typeof(self) _weakSelf = self;
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
-        _weakSelf.frame = finalFrame;
-        [foldingLayer removeFromSuperlayer];
+        __strong typeof(self) _strongSelf = _weakSelf;
+        if ( _strongSelf ) {
+            _strongSelf.frame = finalFrame;
+            [foldingLayer removeFromSuperlayer];
         
-        // Reset the transition state
-        _KBTransitionState = KBFoldingTransitionStateIdle;
-        if ( onCompletion ) {
-            onCompletion(YES);
+            // Reset the transition state
+            _KBTransitionState = KBFoldingTransitionStateIdle;
+            if ( onCompletion ) {
+                onCompletion(YES);
+            }
         }
     }];
     

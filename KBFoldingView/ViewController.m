@@ -36,6 +36,8 @@ static const NSString * kbFoldLabel      = @"Folds: %d";
 static const NSString * kbDurationLabel  = @"Duration: %@";
 static const CGFloat    kbCornerRadius   = 5.0f;
 
+#pragma mark -
+#pragma mark Class Extension
 @interface ViewController ()
 
 @property (nonatomic, strong) NSNumberFormatter *fmt;
@@ -51,6 +53,8 @@ static const CGFloat    kbCornerRadius   = 5.0f;
 
 @end
 
+#pragma mark -
+#pragma mark Implementation
 @implementation ViewController
 #pragma mark -
 #pragma mark View Lifecycle
@@ -147,12 +151,14 @@ static const CGFloat    kbCornerRadius   = 5.0f;
 //
 - (IBAction)pressStartButton:(id)sender {
     // Optional completion block
+    __weak typeof(self) _weakSelf = self;
     void (^completion)(BOOL) = ^(BOOL finished){
-        if ( finished ) {
+        __strong typeof(self) _strongSelf = _weakSelf;
+        if ( finished && _strongSelf ) {
             [UIView animateWithDuration:0.3f
                              animations:^(void) {
-                                 self.endLabel.alpha = 1.0f;
-                                 self.endButton.alpha = 1.0f;
+                                 _strongSelf.endLabel.alpha = 1.0f;
+                                 _strongSelf.endButton.alpha = 1.0f;
                              }];
         }
     };
@@ -167,9 +173,13 @@ static const CGFloat    kbCornerRadius   = 5.0f;
 
 - (IBAction)pressEndButton:(id)sender {
     // Optional completion block
+    __weak typeof(self) _weakSelf = self;
     void (^completion)(BOOL) = ^(BOOL finished) {
-        self.endLabel.alpha = 0.0f;
-        self.endButton.alpha = 0.0f;
+        __strong typeof(self) _strongSelf = _weakSelf;
+        if ( _strongSelf ) {
+            self.endLabel.alpha = 0.0f;
+            self.endButton.alpha = 0.0f;
+        }
     };
     
     // Run the animation
