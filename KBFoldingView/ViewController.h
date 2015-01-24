@@ -26,44 +26,5 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SimpleHeaders.h"
-
 @interface ViewController : UIViewController
-
-// Control Views
-@property (nonatomic, KB_WEAK) IBOutlet UISegmentedControl * directionControl;
-@property (nonatomic, KB_WEAK) IBOutlet UISlider * foldControl;
-@property (nonatomic, KB_WEAK) IBOutlet UISlider * durationControl;
-@property (nonatomic, KB_WEAK) IBOutlet UIStepper * foldStepper;
-@property (nonatomic, KB_WEAK) IBOutlet UIStepper * durationStepper;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel * transitionLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel * foldLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel * durationLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel * resetLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UILabel * endLabel;
-@property (nonatomic, KB_WEAK) IBOutlet UIButton * transitionButton;
-@property (nonatomic, KB_WEAK) IBOutlet UIButton * resetButton;
-@property (nonatomic, KB_WEAK) IBOutlet UIButton * endButton;
-
-// Folding Views 
-@property (nonatomic, KB_WEAK) IBOutlet UIView *startView;
-@property (nonatomic, strong) IBOutlet UIView *endView; 
-
-// Data Properties
-@property (nonatomic, readonly) NSUInteger direction;
-@property (nonatomic, readonly) NSUInteger folds;
-@property (nonatomic, readonly) CGFloat duration;
-
-#pragma mark -
-#pragma mark IBAction Methods
-- (IBAction)pressStartButton:(id)sender;
-- (IBAction)pressEndButton:(id)sender;
-- (IBAction)pressReset:(id)sender;
-
-- (IBAction)updateDirectionControl:(id)sender;
-- (IBAction)updateFoldControl:(id)sender;
-- (IBAction)updateFoldStepper:(id)sender;
-- (IBAction)updateDurationControl:(id)sender;
-- (IBAction)updateDurationStepper:(id)sender;
-
 @end

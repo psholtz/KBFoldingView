@@ -657,7 +657,7 @@ KeyframeParametrizedBlock kbCloseFunction = ^double(NSTimeInterval time) {
            direction == KBFoldingViewDirectionFromTop ||
            direction == KBFoldingViewDirectionFromBottom) )
     {
-        NSLog(@"[KBFoldingView] -- Error -- Invalid direction: %ld", direction);
+        NSLog(@"[KBFoldingView] -- Error -- Invalid direction: %ld", (long)direction);
         return NO;
     }
     

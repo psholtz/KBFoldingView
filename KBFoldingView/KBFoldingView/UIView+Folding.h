@@ -29,6 +29,8 @@
 
 typedef double (^KeyframeParametrizedBlock)(NSTimeInterval);
 
+#pragma mark - Defines
+
 //
 // The following constants can be used in case you think its
 // useful to exclude nonsense values from being supplied to the
@@ -49,11 +51,8 @@ typedef double (^KeyframeParametrizedBlock)(NSTimeInterval);
 #define kbDefaultFolds      3
 #define kbDefaultDuration   1.0
 
-#pragma mark -
-#pragma mark CAKeyframeAnimation Category
-//
-// CAKeyframeAnimation Category
-//
+#pragma mark - CAKeyframeAnimation Category
+
 @interface CAKeyframeAnimation (Parametrized)
 
 + (id)parametrizedAnimationWithKeyPath:(NSString*)path
@@ -79,17 +78,14 @@ typedef enum {
     KBFoldingTransitionStateShowing = 2,
 } KBFoldingTransitionState;
 
-#pragma mark -
-#pragma mark UIView Category
-//
-// UIView Category
-// 
+#pragma mark - UIView Category
+
 @interface UIView (Folding)
 
 @property (nonatomic, readonly) NSUInteger state;
 
-#pragma mark -
-#pragma mark Show Methods
+#pragma mark - Show Methods
+
 // Fold the view using defaults
 - (void)showFoldingView:(UIView*)view;
 
@@ -100,8 +96,8 @@ typedef enum {
                duration:(NSTimeInterval)duration
            onCompletion:(void (^)(BOOL finished))onCompletion;
 
-#pragma mark -
-#pragma mark Hide Methods 
+#pragma mark - Hide Methods 
+
 // Hide the folds using defaults
 - (void)hideFoldingView:(UIView*)view;
 

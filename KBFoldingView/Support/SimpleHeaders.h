@@ -24,6 +24,8 @@
 //  Created by Paul Sholtz on 5/6/13.
 //
 
+#pragma mark - Weak Linking
+
 //
 // Macro for weak linking, in case we want to support 4.3 and before
 //
@@ -36,6 +38,8 @@
 #define KB_WEAK assign
 #endif
 #endif
+
+#pragma mark - Hardware Detection
 
 //
 // Macros for hardware detection

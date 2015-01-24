@@ -27,8 +27,10 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "ViewController.h"
-
 #import "UIView+Folding.h"
+#import "SimpleHeaders.h"
+
+#pragma mark - Defines
 
 #define kbBackgroundColor [UIColor colorWithRed:0.701961 green:0.701961 blue:0.701961 alpha:0.7f]
 
@@ -36,31 +38,72 @@ static const NSString * kbFoldLabel      = @"Folds: %d";
 static const NSString * kbDurationLabel  = @"Duration: %@";
 static const CGFloat    kbCornerRadius   = 5.0f;
 
-#pragma mark -
-#pragma mark Class Extension
+#pragma mark - Class Extension
+
 @interface ViewController ()
+
+#pragma mark - IBOutlets 
+
+@property (nonatomic, KB_WEAK) IBOutlet UISegmentedControl * directionControl;
+@property (nonatomic, KB_WEAK) IBOutlet UISlider  * foldControl;
+@property (nonatomic, KB_WEAK) IBOutlet UISlider  * durationControl;
+@property (nonatomic, KB_WEAK) IBOutlet UIStepper * foldStepper;
+@property (nonatomic, KB_WEAK) IBOutlet UIStepper * durationStepper;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel  * transitionLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel  * foldLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel  * durationLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel  * resetLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UILabel  * endLabel;
+@property (nonatomic, KB_WEAK) IBOutlet UIButton * transitionButton;
+@property (nonatomic, KB_WEAK) IBOutlet UIButton * resetButton;
+@property (nonatomic, KB_WEAK) IBOutlet UIButton * endButton;
+
+#pragma mark - IBAction Methods
+
+- (IBAction)pressStartButton:(id)sender;
+- (IBAction)pressEndButton:(id)sender;
+- (IBAction)pressReset:(id)sender;
+
+- (IBAction)updateDirectionControl:(id)sender;
+- (IBAction)updateFoldControl:(id)sender;
+- (IBAction)updateFoldStepper:(id)sender;
+- (IBAction)updateDurationControl:(id)sender;
+- (IBAction)updateDurationStepper:(id)sender;
+
+#pragma mark - Properties (Folding Views)
+
+@property (nonatomic, KB_WEAK) IBOutlet UIView * startView;
+@property (nonatomic, strong)  IBOutlet UIView * endView;
+
+#pragma mark - Properties (Number Formatters)
 
 @property (nonatomic, strong) NSNumberFormatter *fmt;
 
-// Update the Data Model
+#pragma mark - Properties (Data Properties)
+
+@property (nonatomic, readonly) NSUInteger direction;
+@property (nonatomic, readonly) NSUInteger folds;
+@property (nonatomic, readonly) CGFloat duration;
+
+#pragma mark - Methods (Data Model)
+
 - (void)updateDirectionValue:(NSUInteger)value;
 - (void)updateFoldValue:(CGFloat)value;
 - (void)updateDurationValue:(CGFloat)value;
 
-// Helper Methods for UI
+#pragma mark - Methods (Helper Metods for UI)
+
 - (void)foldValueChanged:(id)sender;
 - (void)durationValueChanged:(id)sender;
 
 @end
 
-#pragma mark -
-#pragma mark Implementation
+#pragma mark - Class Implementation
+
 @implementation ViewController
-#pragma mark -
-#pragma mark View Lifecycle
-//
-// View Lifecycle
-//
+
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -144,11 +187,8 @@ static const CGFloat    kbCornerRadius   = 5.0f;
     [control.layer setCornerRadius:kbCornerRadius];
 }
 
-#pragma mark -
-#pragma mark IBAction Methods
-//
-// IBAction Methods
-//
+#pragma mark - IBAction Methods
+
 - (IBAction)pressStartButton:(id)sender {
     // Optional completion block
     __weak typeof(self) _weakSelf = self;
@@ -220,11 +260,8 @@ static const CGFloat    kbCornerRadius   = 5.0f;
     [self updateDurationValue:stepper.value];
 }
 
-#pragma mark -
-#pragma mark Data Model
-//
-// Data Model
-//
+#pragma mark - Data Model Methods
+
 - (void)updateDirectionValue:(NSUInteger)value {
     [self.directionControl setSelectedSegmentIndex:value];
     _direction = self.directionControl.selectedSegmentIndex;
@@ -247,11 +284,8 @@ static const CGFloat    kbCornerRadius   = 5.0f;
     _duration = value;
 }
 
-#pragma mark -
 #pragma mark Helper Methods to Update Labels in Realtime
-//
-// Helper UI Methods
-//
+
 - (void)foldValueChanged:(id)sender {
     self.foldLabel.text = [NSString stringWithFormat:(NSString*)kbFoldLabel, (int)(round(self.foldControl.value))];
 }
