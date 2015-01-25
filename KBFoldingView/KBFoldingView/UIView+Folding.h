@@ -65,18 +65,18 @@ typedef double (^KeyframeParametrizedBlock)(NSTimeInterval);
 //
 // Animation Constants
 //
-typedef enum {
-    KBFoldingViewDirectionFromRight     = 0,
-    KBFoldingViewDirectionFromLeft      = 1,
-    KBFoldingViewDirectionFromTop       = 2,
-    KBFoldingViewDirectionFromBottom    = 3,
-} KBFoldingViewDirection;
+typedef NS_ENUM(NSInteger, KBFoldingViewDirection) {
+    KBFoldingViewDirectionFromRight  = 0,
+    KBFoldingViewDirectionFromLeft   = 1,
+    KBFoldingViewDirectionFromTop    = 2,
+    KBFoldingViewDirectionFromBottom = 3,
+};
 
-typedef enum {
+typedef NS_ENUM(NSInteger, KBFoldingTransitionState) {
     KBFoldingTransitionStateIdle    = 0,
     KBFoldingTransitionStateUpdate  = 1,
     KBFoldingTransitionStateShowing = 2,
-} KBFoldingTransitionState;
+};
 
 #pragma mark - UIView Category
 
