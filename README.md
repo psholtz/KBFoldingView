@@ -58,6 +58,13 @@ Change Log
  <li>Initial Release</li>
 </ul>
 
+**Version 1.1** @ February 11, 2015
+
+<ul>
+<li>Support for iOS7, iOS8.</li>
+<li>Other minor updates.</li>
+</ul>
+
 Acknowledgements
 ---------------- 
 
