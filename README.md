@@ -52,17 +52,17 @@ The code is distributed under the terms and conditions of the MIT license.
 Change Log
 ---------- 
 
-**Version 1.0** @ May 11, 2013
-
-<ul>
- <li>Initial Release</li>
-</ul>
-
 **Version 1.1** @ February 11, 2015
 
 <ul>
 <li>Support for iOS7, iOS8.</li>
 <li>Other minor updates.</li>
+</ul>
+
+**Version 1.0** @ May 11, 2013
+
+<ul>
+ <li>Initial Release.</li>
 </ul>
 
 Acknowledgements
